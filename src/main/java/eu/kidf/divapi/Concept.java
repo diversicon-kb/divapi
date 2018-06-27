@@ -6,19 +6,21 @@ package eu.kidf.divapi;
  */
 public class Concept {
     
-    private Object resource;
+    /* an optional object that may contain an arbitrary representation of the concept */
+    private Object container;
+    /* a unique identifier for the concept */
     private String id;
     
-    public Concept(Object r, String id) {
-        this.resource = r;
+    public Concept(Object c, String id) {
+        this.container = c;
         this.id = id;
     }
     
-    public Object getResource() {
-        return resource;
+    public Object getContainer() {
+        return container;
     }
 
-    public Object getID() {
+    public String getID() {
         return id;
     }
 }

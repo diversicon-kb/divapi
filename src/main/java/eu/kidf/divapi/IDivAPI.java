@@ -96,30 +96,29 @@ public interface IDivAPI {
     Map<String,Double> getRelatedWordsWeighted(String language, Domain domain, String word, WordRelation rel);
 
     /**
-     * Return if the two words in input are related by the relation specified,
+     * Return all existing relations between the two words in input,
      * in the given language and within the given domain.
      * @param language  the language of the word
      * @param domain    the domain to which the request is constrained,
      *                  null means no restriction
      * @param word1     the first word
      * @param word2     the second word
-     * @param rel       the relation kind by which relatedness is evaluated
-     * @return          true if the two words are related, false otherwise
+     * @return          the set of word relations between word1 and word2
      */
-    Boolean getRelatedness(String language, Domain domain, String word1, String word2, WordRelation rel);
+    Set<WordRelation> getRelations(String language, Domain domain, String word1, String word2);
 
     /**
-     * Return the degree by which the two words in input are related by the relation
-     * specified, in the given language and within the given domain.
+     * Return all existing relations between the two words in input,
+     * with relatedness weights, in the given language and within the given domain.
      * @param language  the language of the word
      * @param domain    the domain to which the request is constrained,
      *                  null means no restriction
      * @param word1     the first word
      * @param word2     the second word
-     * @param rel       the relation kind by which relatedness is evaluated
-     * @return          a weight between 0 and 1 expressing the relatedness
+     * @return          weighted word relations between word1 and word2
      */
-    Double getRelatednessWeighted(String language, Domain domain, String word1, String word2, WordRelation rel);
+    Map<WordRelation, Double> getRelationsWeighted(String language, Domain domain, 
+                                                   String word1, String word2);
 
     /**
      * Return the languages in which the resource provides lexicalisations
@@ -167,10 +166,10 @@ public interface IDivAPI {
     Set<String> getWords(String language, Concept concept);
     Map<String,Double> getWordsWeighted(String language, Concept concept);
     String getGloss(String language, Concept concept);
-    Set<Concept> getRelatedConcepts(Concept concept, Set<Relation> relations);
-    Map<Concept,Double> getRelatedConceptsWeighted(Concept concept, Set<Relation> relations);
-    Set<Relation> getRelations(Concept c1, Concept c2);
-    Map<Relation,Double> getRelationsWeighted(Concept c1, Concept c2);
+    Set<Concept> getRelatedConcepts(Concept concept, Set<ConceptRelation> relations);
+    Map<Concept,Double> getRelatedConceptsWeighted(Concept concept, Set<ConceptRelation> relations);
+    Set<ConceptRelation> getRelations(Concept c1, Concept c2);
+    Map<ConceptRelation,Double> getRelationsWeighted(Concept c1, Concept c2);
     Set<String> getLanguages(Domain domain, Concept concept);
     Set<Domain> getDomains(Concept concept);
     Map<Domain,Double> getDomainsWeighted(Concept concept);
